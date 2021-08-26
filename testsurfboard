@@ -1,0 +1,8 @@
+ProxySS1 = custom, 1.2.3.4, 443, aes-256-cfb, password, http://host/SSE.module, obfs=http, obfs-host=cloudfront.net, udp-relay=false
+ProxySS2 = ss, 1.2.3.4, 443, aes-256-cfb, password, http://host/SSE.module, obfs=http, obfs-host=cloudfront.net, udp-relay=false
+ProxyHTTP = http, 1.2.3.4, 443, username, password, tls=false, skip-cert-verify=false
+ProxyHTTPS = https, 1.2.3.4, 443, username, password, skip-cert-verify=true
+ProxySOCKS5 = socks5, 1.2.3.4, 443, username, password, tls=false, skip-cert-verify=false
+ProxySOCKS5TLS = socks5-tls, 1.2.3.4, 443, username, password, skip-cert-verify=true
+ProxyVMESS = vmess, 1.2.3.4, 443, username = 12345678-abcd-1234-1234-47ffca0ce229, ws=true, tls=true, skip-cert-verify=false, ws-path=/v2, ws-headers=X-Header-1:value|X-Header-2:value, udp-relay=true
+ProxyTrojan = trojan, 1.2.3.4, 443, password=abcd1234
