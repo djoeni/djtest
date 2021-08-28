@@ -1,0 +1,37 @@
+proxies:
+
+- name: "SSR1"
+  type: ssr
+  server: server
+  port: 443
+  cipher: chacha20-ietf
+  password: "password"
+  obfs: plain
+  protocol: origin
+  udp: true
+  #obfs-param: domain.tld
+  #protocol-param: "#"
+
+- name: "SSR2"
+  type: ssr
+  server: server
+  port: 443
+  cipher: chacha20-ietf
+  password: "password"
+  obfs: http_simple
+  protocol: auth_sha1_v4
+  udp: true
+  #obfs-param: domain.tld
+  #protocol-param: "#"
+
+- name: "SSR3"
+  type: ssr
+  server: server
+  port: 443
+  cipher: chacha20-ietf
+  password: "password"
+  obfs: tls1.2_ticket_auth
+  protocol: auth_aes128_md5
+  udp: true
+  #obfs-param: domain.tld
+  #protocol-param: "#"
