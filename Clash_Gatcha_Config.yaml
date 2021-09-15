@@ -106,7 +106,9 @@ proxy-groups:
 
 proxy-providers:
   Server_Vmess:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Server_Vmess.yaml
+    interval: 3600
     path: ./Server_Vmess.yaml
     health-check:
       enable: true
@@ -115,7 +117,9 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
       
   Server_Trojan:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Server_Trojan.yaml
+    interval: 3600
     path: ./Server_Trojan.yaml
     health-check:
       enable: true
@@ -124,7 +128,9 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
 
   Server_SS:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Server_SS.yaml
+    interval: 3600
     path: ./Server_SS.yaml
     health-check:
       enable: true
@@ -135,6 +141,7 @@ proxy-providers:
   Server_SSR:
     type: http
     url: https://raw.githubusercontent.com/djoeni/djtest/main/Server_SSR.yaml
+    interval: 3600
     path: ./Server_SSR.yaml
     health-check:
       enable: true
@@ -143,7 +150,9 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
 
   Server_Other:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Server_Other.yaml
+    interval: 3600
     path: ./Server_Other.yaml
     health-check:
       enable: true
@@ -154,12 +163,16 @@ proxy-providers:
 rule-providers:
   Rules_Lan:
     behavior: ipcidr
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Rules_Lan.yaml
+    interval: 3600
     path: ./Rules_Lan.yaml
 
   Rules_Reject:
     behavior: domain
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Rules_Reject.yaml
+    interval: 3600
     path: ./Rules_Reject.yaml
 
   #Rules_Adguard:
