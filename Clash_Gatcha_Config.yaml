@@ -19,121 +19,121 @@
 #    ipcidr:
 #    - 240.0.0.0/4
 #  nameserver:
-#  - https://cloudflare-dns.com/dns-query
-#  - https://dns.google/dns-query
-#  - tls://1.1.1.1:853
-#  - tls://8.8.8.8:853
+#    - https://cloudflare-dns.com/dns-query
+#    - https://dns.google/dns-query
+#    - tls://1.1.1.1:853
+#    - tls://8.8.8.8:853
 #  fallback:
-#  - tcp://1.1.1.1
-#  - tcp://8.8.8.8
-#  - 1.1.1.1
-#  - 8.8.8.8
+#    - tcp://1.1.1.1
+#    - tcp://8.8.8.8
+#    - 1.1.1.1
+#    - 8.8.8.8
 
 proxy-groups:
 - name: FINAL
   type: select
   proxies:
-  - Vmess
-  - Trojan  
-  - SS
-  - SSR
-  - Other
-  - Auto_Vmess
-  - Auto_Trojan
-  - Auto_SS
-  - Auto_SSR
-  - Auto_All
-  - LoadBalance_Vmess
-  - LoadBalance_Trojan
-  - LoadBalance_SS
-  - LoadBalance_SSR
+    - Vmess
+    - Trojan  
+    - SS
+    - SSR
+    - Other
+    - Auto_Vmess
+    - Auto_Trojan
+    - Auto_SS
+    - Auto_SSR
+    - Auto_All
+    - LoadBalance_Vmess
+    - LoadBalance_Trojan
+    - LoadBalance_SS
+    - LoadBalance_SSR
 
 - name: Vmess
   type: select
   use:
-  - Server_Vmess
+    - Server_Vmess
 
 - name: Trojan
   type: select
   use:
-  - Server_Trojan
+    - Server_Trojan
 
 - name: SS
   type: select
   use:
-  - Server_SS
+    - Server_SS
 
 - name: SSR
   type: select
   use:
-  - Server_SSR
+    - Server_SSR
 
 - name: Other
   type: select
   use:
-  - Server_Other
+    - Server_Other
 
 - name: Auto_Vmess
   type: url-test
   tolerance: 50
   use:
-  - Server_Vmess
+    - Server_Vmess
 
 - name: Auto_Trojan
   type: url-test
   tolerance: 50
   use:
-  - Server_Trojan
+    - Server_Trojan
 
 - name: Auto_SS
   type: url-test
   tolerance: 50
   use:
-  - Server_SS
+    - Server_SS
 
 - name: Auto_SSR
   type: url-test
   tolerance: 50
   use:
-  - Server_SSR
+    - Server_SSR
 
 - name: Auto_All
   type: url-test
   tolerance: 50
   use:
-  - Server_Vmess
-  - Server_Trojan
-  - Server_SS
-  - Server_SSR
-  - Server_Other
+    - Server_Vmess
+    - Server_Trojan
+    - Server_SS
+    - Server_SSR
+    - Server_Other
 
 - name: LoadBalance_Vmess
   type: load-balance
   strategy: consistent-hashing #round-robin
   disable-udp: false
   use:
-  - Server_Vmess
+    - Server_Vmess
 
 - name: LoadBalance_Trojan
   type: load-balance
   strategy: consistent-hashing #round-robin
   disable-udp: false
   use:
-  - Server_Trojan
+    - Server_Trojan
 
 - name: LoadBalance_SS
   type: load-balance
   strategy: consistent-hashing #round-robin
   disable-udp: false
   use:
-  - Server_SS
+    - Server_SS
 
 - name: LoadBalance_SSR
   type: load-balance
   strategy: consistent-hashing #round-robin
   disable-udp: false
   use:
-  - Server_SSR
+    - Server_SSR
 
 proxy-providers:
   Server_Vmess:
