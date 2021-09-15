@@ -1,0 +1,62 @@
+proxies:
+
+- name: "Weekly Trojan"
+  type: trojan
+  server: trojan1.bonds.id
+  password: password
+  sni: sni.com
+  port: 443  
+  udp: true  
+  alpn:
+     - h2
+     - http/1.1
+  skip-cert-verify: true
+
+- name: "ID-Biznet Trojan"
+  type: trojan
+  server: id2-trojan.bonds.id
+  password: password
+  sni: sni.com
+  port: 443  
+  udp: true  
+  alpn:
+     - h2
+     - http/1.1
+  skip-cert-verify: true
+
+- name: "ID-Sanggoro Trojan"
+  type: trojan
+  server: id1-trojan.bonds.id
+  password: password
+  sni: sni.com
+  port: 443  
+  udp: true  
+  alpn:
+     - h2
+     - http/1.1
+  skip-cert-verify: true
+  
+- name: "SG.GS Trojan"
+  type: trojan
+  server: sg5-trojan.bonds.id
+  password: password
+  sni: sni.com
+  port: 443  
+  udp: true  
+  alpn:
+     - h2
+     - http/1.1
+  skip-cert-verify: true
+
+- name: "SG-HE MUX Trojan"
+  type: trojan
+  server: sg6-trojan.bonds.id
+  password: password
+  sni: sni.com
+  port: 443  
+  udp: true  
+  alpn:
+     - h2
+     - http/1.1
+  skip-cert-verify: true
+

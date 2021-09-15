@@ -1,0 +1,178 @@
+proxy-groups:
+- name: FINAL
+  type: select
+  proxies:
+  - Vmess
+  - Trojan  
+  - SS
+  - SSR
+  - Other
+  - Auto_Vmess
+  - Auto_Trojan
+  - Auto_SS
+  - Auto_SSR
+  - Auto_All
+  - LoadBalance_Vmess
+  - LoadBalance_Trojan
+  - LoadBalance_SS
+  - LoadBalance_SSR
+
+- name: Vmess
+  type: select
+  use:
+  - Server_Vmess
+
+- name: Trojan
+  type: select
+  use:
+  - Server_Trojan
+
+- name: SS
+  type: select
+  use:
+  - Server_SS
+
+- name: SSR
+  type: select
+  use:
+  - Server_SSR
+
+- name: Other
+  type: select
+  use:
+  - Server_Other
+
+- name: Auto_Vmess
+  type: url-test
+  tolerance: 50
+  use:
+  - Server_Vmess
+
+- name: Auto_Trojan
+  type: url-test
+  tolerance: 50
+  use:
+  - Server_Trojan
+
+- name: Auto_SS
+  type: url-test
+  tolerance: 50
+  use:
+  - Server_SS
+
+- name: Auto_SSR
+  type: url-test
+  tolerance: 50
+  use:
+  - Server_SSR
+
+- name: Auto_All
+  type: url-test
+  tolerance: 50
+  use:
+  - Server_Vmess
+  - Server_Trojan
+  - Server_SS
+  - Server_SSR
+  - Server_Other
+
+- name: LoadBalance_Vmess
+  type: load-balance
+  strategy: consistent-hashing #round-robin
+  disable-udp: false
+  use:
+  - Server_Vmess
+
+- name: LoadBalance_Trojan
+  type: load-balance
+  strategy: consistent-hashing #round-robin
+  disable-udp: false
+  use:
+  - Server_Trojan
+
+- name: LoadBalance_SS
+  type: load-balance
+  strategy: consistent-hashing #round-robin
+  disable-udp: false
+  use:
+  - Server_SS
+
+- name: LoadBalance_SSR
+  type: load-balance
+  strategy: consistent-hashing #round-robin
+  disable-udp: false
+  use:
+  - Server_SSR
+
+proxy-providers:
+  Server_Vmess:
+    type: file
+    path: ./Server_Vmess.yaml
+    health-check:
+      enable: true
+      interval: 300
+      #lazy: true
+      url: http://www.gstatic.com/generate_204
+      
+  Server_Trojan:
+    type: file
+    path: ./Server_Trojan.yaml
+    health-check:
+      enable: true
+      interval: 300
+      #lazy: true
+      url: http://www.gstatic.com/generate_204
+
+  Server_SS:
+    type: file
+    path: ./Server_SS.yaml
+    health-check:
+      enable: true
+      interval: 300
+      #lazy: true
+      url: http://www.gstatic.com/generate_204
+
+  Server_SSR:
+    type: http
+    url: https://raw.githubusercontent.com/djoeni/djtest/main/Server_SSR.yaml
+    path: ./Server_SSR.yaml
+    health-check:
+      enable: true
+      interval: 300
+      #lazy: true
+      url: http://www.gstatic.com/generate_204
+
+  Server_Other:
+    type: file
+    path: ./Server_Other.yaml
+    health-check:
+      enable: true
+      interval: 300
+      #lazy: true
+      url: http://www.gstatic.com/generate_204
+
+rule-providers:
+  Rules_Lan:
+    behavior: ipcidr
+    type: file
+    path: ./Rules_Lan.yaml
+
+  Rules_Reject:
+    behavior: domain
+    type: file
+    path: ./Rules_Reject.yaml
+
+  #Rules_Adguard:
+    #behavior: domain
+    #type: file
+    #path: ./Rules_Adguard.yaml
+
+# rules adguard (adguardteam github)...optional
+# silahkan dicoba sendiri hampir sama dengan
+# rules reject(loyalsoldier github)
+
+rules:
+- RULE-SET,Rules_Lan,DIRECT,no-resolve
+- RULE-SET,Rules_Reject,REJECT
+#- RULE-SET,Rules_Adguard,REJECT
+- MATCH,FINAL

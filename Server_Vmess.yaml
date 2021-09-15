@@ -1,0 +1,50 @@
+proxies:
+
+- name: "Weekly V2ray"
+  type: vmess
+  port: 443
+  alterId: 32
+  cipher: auto
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  server: v2ray1.bonds.id
+  uuid: 3d75a152-d7b4-4b6c-9f87-2e75c9ec4335
+  servername: sni.com
+  network: ws
+  ws-path: /howdy
+  ws-headers:
+    Host: sni.com
+  
+- name: "Dynamic SG Vultr"
+  type: vmess
+  port: 443
+  alterId: 32
+  cipher: auto
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  server: dynamic-sg1b.hostip.co
+  uuid: 3d75a152-d7b4-4b6c-9f87-2e75c9ec4335
+  servername: sni.com
+  network: ws
+  ws-path: /fastssh
+  ws-headers:
+    Host: sni.com
+
+- name: "Dynamic US Vultr"
+  type: vmess
+  port: 443
+  alterId: 32
+  cipher: auto
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  server: dynamic-us1b.hostip.co
+  uuid: 3d75a152-d7b4-4b6c-9f87-2e75c9ec4335
+  servername: sni.com
+  network: ws
+  ws-path: /fastssh
+  ws-headers:
+    Host: sni.com
+

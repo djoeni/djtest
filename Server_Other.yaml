@@ -1,0 +1,45 @@
+proxies:
+
+# SOCKS5
+- name: "ID-SOCKS5-WOIDEN"
+  type: socks5
+  server: id-socks5.woiden.net
+  username: username
+  password: password
+  port: 443
+  udp: true
+  #tls: true
+  #skip-cert-verify: true
+
+- name: "SG-SOCKS5-WOIDEN"
+  type: socks5
+  server: sg-socks5.woiden.net
+  port: 443  
+  username: username
+  password: password
+  udp: true
+  #tls: true
+  #skip-cert-verify: true
+
+# SNELL (blm support UDP)
+- name: "HOWDY.ID SNELL"
+  type: snell
+  server: tunnel.bonds.id
+  port: 37817   #12345 #mode http
+  psk: C1iZFl3CZPDbNSTeEsV61V7whEBxgjG  #wOOPnkk38f8UKZu92Dz2XC5rFB58A5M #mode http
+  version: 2
+  obfs-opts:
+    mode: tls #http
+    host: sni
+
+# HTTP
+- name: "Http"
+  type: http
+  server: server
+  port: 443
+  #username: username
+  #password: password
+  #tls: true # https
+  #skip-cert-verify: true
+  #sni: custom.com
+
