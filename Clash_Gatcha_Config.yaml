@@ -1,3 +1,34 @@
+#redir-port: 7892
+#port: 7890
+#socks-port: 7891
+#mixed-port: 7893
+#mode: rule
+#log-level: silent
+#allow-lan: true
+#external-controller: 0.0.0.0:9090
+#secret: '123456'
+#bind-address: "*"
+#ipv6: false
+#dns:
+#  enable: true
+#  ipv6: false
+#  enhanced-mode: redir-host
+#  listen: 127.0.0.1:7874
+#  fallback-filter:
+#    geoip: false
+#    ipcidr:
+#    - 240.0.0.0/4
+#  nameserver:
+#  - https://cloudflare-dns.com/dns-query
+#  - https://dns.google/dns-query
+#  - tls://1.1.1.1:853
+#  - tls://8.8.8.8:853
+#  fallback:
+#  - tcp://1.1.1.1
+#  - tcp://8.8.8.8
+#  - 1.1.1.1
+#  - 8.8.8.8
+
 proxy-groups:
 - name: FINAL
   type: select
@@ -168,17 +199,7 @@ rule-providers:
     url: https://raw.githubusercontent.com/djoeni/djtest/main/Rules_Reject.yaml
     path: ./Rules_Reject.yaml
 
-  #Rules_Adguard:
-    #behavior: domain
-    #type: file
-    #path: ./Rules_Adguard.yaml
-
-# rules adguard (adguardteam github)...optional
-# silahkan dicoba sendiri hampir sama dengan
-# rules reject(loyalsoldier github)
-
 rules:
 - RULE-SET,Rules_Lan,DIRECT,no-resolve
 - RULE-SET,Rules_Reject,REJECT
-#- RULE-SET,Rules_Adguard,REJECT
 - MATCH,FINAL
