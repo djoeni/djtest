@@ -1,5 +1,0 @@
-REJECT,clash-domain:https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt,86400
-TYPE_DOMAIN,clash-domain:https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt,86400
-TYPE_IPCIDR,clash-ipcidr:https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt,86400
-TYPE_CLASSICAL,clash-classic:https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt,86400
-HOWDY ID,[]FINAL
