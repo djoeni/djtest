@@ -1,0 +1,191 @@
+## 	==========================================================================================	##
+
+##	Tutorial dan contoh penggunaan custom config
+## 	Basic config menggunakan format .toml supaya mudah di pahami
+## 	Untuk base_config bisa menggunakan config sendiri dengan format url (remote link config)
+#  	atau menggunakan yg sudah disediakan sub.bonds.id 
+## 	List url base config yg disediakan:
+
+#  	https://sub.bonds.id/download/basestandard_redir.ini
+#	https://sub.bonds.id/download/basestandard_fake.ini
+#	https://sub.bonds.id/download/basecfm_redir.ini
+#	https://sub.bonds.id/download/basecfm_fake.ini
+
+## 	Tutorial hanya sederhana untuk lebih jelas nya silakan baca2 di repo subconverter
+#  	https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95
+	
+##	Setelah custom_config di upload dan di rasa sudah mantap link hasil upload bisa di simpan untuk
+#	digunakan kembali / di share tanpa input2 lagi di "Upload Custom" dengan cara:
+#	- klik di "Pilih Jenis Config" dulu (tanpa pilih) trs paste di kolom situ
+#	- setelah paste muncul di bawah nya pilihan dengan nama sesuai yg di paste -> pilih opsi yg muncul tadi
+
+## 	==========================================================================================	##
+
+##	tutorial custom groups
+##	header custom group
+#[[custom_groups]]
+
+##	nama group
+#name = "Custom_Groups"
+
+##	type group: "select" | "url-test" | "load-balance" | "fallback"
+#type = "select"
+
+##	rule/isi proxy2 di groups di pisahkan dengan ", " contoh format:
+## 	".*" = untuk menambahkan semua proxy yg dimasukan di subconverter
+## 	"[]DIRECT" , "[]REJECT" = untuk menambahkan default proxy dr clash
+##	"[]BROWSING" = untuk menambahkan proxy group "BROWSING" yg di buat
+## 	"1" , "2" = untuk hanya menambahkan sesuai urutan proxy yg di input di subconverter
+#rule = [".*", "[]BROWSING", "[]DIRECT", "[]REJECT"]
+
+##	jika menggunakan proxy-provider tambahkan nama provider nya
+##	untuk setting proxy-provider masih manual atau tambahkan di dalam base config
+#use "Provider"
+
+##	url-check
+#url = "http://www.gstatic.com/generate_204"
+
+##	interval url-check
+#interval = 300
+
+##	opsi hanya untuk type group "url-test"
+#tolerance = 150
+#lazy = true
+
+##	opsi hanya untuk type group "load-balance"
+##	strategy "consistent-hashing" atau "round-robin"
+#strategy = "round-robin"
+
+###	remote custom group jika sudah ada setting config group sudah jadi (ext file .toml)
+#[[custom_groups]]
+#import = "https://https://raw.githubusercontent.com/xxxxx/custom_groups.toml"
+
+## 	==========================================================================================	##
+
+##	tutorial ruleset
+##	header ruleset
+#[[rulesets]]
+
+##	nama proxy group yg digunakan untuk ruleset, nama ruleset mengikuti nama file
+##	bisa menggunakan default dr clash "DIRECT" , "REJECT"
+#group = "Nama_Group"
+
+##	remote link rules
+#ruleset = "https://https://raw.githubusercontent.com/xxxxx/rules.txt"
+
+##	clash rules behavior type tergantung dr payload rules yg di pake
+##	(domain) = "clash-domain", (classical) = "clash-classic", (ipcidr) = "clash-ipcidr"
+#type = "clash-domain"
+
+##	interval check rules
+#interval = 86400
+
+###	untuk rules "MATCH" menggunakan setting:
+#[[rulesets]]
+#group = "Nama_Group"
+#ruleset = "[]FINAL"
+
+###	remote custom ruleset jika sudah ada setting config ruleset sudah jadi (ext file .toml)
+#[[rulesets]]
+#import = "https://https://raw.githubusercontent.com/xxxxx/custom_ruleset.toml"
+
+## 	==========================================================================================	##
+
+##	Contoh custom config versi local
+
+version=1
+[custom]
+enable_rule_generator=true 
+overwrite_original_rules=true
+
+clash_rule_base = "https://sub.bonds.id/download/basestandard_redir.ini"
+
+[[custom_groups]]
+name = "BEST PING"
+type = "url-test"
+rule = [".*"]
+url = "http://www.gstatic.com/generate_204"
+interval = 300
+tolerance = 150
+lazy = true
+
+[[custom_groups]]
+name = "LOAD BALANCE"
+type = "load-balance"
+rule = [".*"]
+url = "http://www.gstatic.com/generate_204"
+interval = 300
+strategy = "consistent-hashing"
+
+[[custom_groups]]
+name = "FALLBACK"
+type = "fallback"
+rule = [".*"]
+url = "http://www.gstatic.com/generate_204"
+interval = 300
+
+[[custom_groups]]
+name = "MASTER"
+type = "select"
+rule = [".*", "[]BEST PING", "[]LOAD BALANCE", "[]FALLBACK", "[]DIRECT"]
+use = "Provider"
+disable_udp = false
+
+[[rulesets]]
+group = "REJECT"
+ruleset = "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
+type = "clash-domain"
+interval = 86400
+
+[[rulesets]]
+group = "MASTER"
+ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+type = "clash-ipcidr"
+interval = 86400
+
+[[rulesets]]
+group = "MASTER"
+ruleset = "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+type = "clash-classic"
+interval = 86400
+
+[[rulesets]]
+group = "MASTER"
+ruleset = "[]FINAL"
+
+## 	==========================================================================================	##
+
+##	DUMMY contoh custom config versi remote / alias semua pointing ke link
+
+version=1
+[custom]
+enable_rule_generator=true 
+overwrite_original_rules=true
+
+clash_rule_base = "https://https://raw.githubusercontent.com/xxxxx/base_config.ini"
+
+[[custom_groups]]
+import = "https://https://raw.githubusercontent.com/xxxxx/all_groups.toml"
+
+[[custom_groups]]
+import = "https://https://raw.githubusercontent.com/xxxxx/groups_bestping.toml"
+
+[[custom_groups]]
+import = "https://https://raw.githubusercontent.com/xxxxx/groups_loadbalance.toml"
+
+[[custom_groups]]
+import = "https://https://raw.githubusercontent.com/xxxxx/groups_fallback.toml"
+
+[[custom_groups]]
+import = "https://https://raw.githubusercontent.com/xxxxx/groups_master.toml"
+
+[[rulesets]]
+import = "https://https://raw.githubusercontent.com/xxxxx/all_rulesets.toml"
+
+[[rulesets]]
+import = "https://https://raw.githubusercontent.com/xxxxx/rulesets_adblocks.toml"
+
+[[rulesets]]
+import = "https://https://raw.githubusercontent.com/xxxxx/rulesets_danlainlain.toml"
+
+## 	==========================================================================================	##
