@@ -3,7 +3,7 @@
 ##	Tutorial dan contoh penggunaan custom config
 ## 	Basic config menggunakan format .toml supaya mudah di pahami
 ## 	Untuk base_config bisa menggunakan config sendiri dengan format url (remote link config)
-#  	atau menggunakan yg sudah disediakan sub.bonds.id 
+#  	atau menggunakan yg sudah disediakan sama seperti base sub.bonds.id 
 ## 	List url base config yg disediakan:
 
 #  	https://sub.bonds.id/download/basestandard_redir.ini
