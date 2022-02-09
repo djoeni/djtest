@@ -30,13 +30,16 @@
 
 ## type group: "select" | "url-test" | "load-balance" | "fallback"
 #type = "select"
+#type = "url-test"
+#type = "load-balance"
+#type = "fallback"
 
 ## rule/isi proxy2 di groups di pisahkan dengan ", " contoh format:
 ## ".*" = untuk menambahkan semua proxy yg dimasukan di subconverter
 ## "[]DIRECT" , "[]REJECT" = untuk menambahkan default proxy dr clash
 ## "[]BROWSING" = untuk menambahkan proxy group "BROWSING" yg di buat
 ## "1" , "2" = untuk hanya menambahkan sesuai urutan proxy yg di input di subconverter
-#rule = [".*", "[]BROWSING", "[]DIRECT", "[]REJECT"]
+#rule = [".*", "1", "2", "[]BROWSING", "[]DIRECT", "[]REJECT"]
 
 ## jika menggunakan proxy-provider tambahkan nama provider nya
 ## untuk setting proxy-provider masih manual atau tambahkan di dalam base config
@@ -54,6 +57,7 @@
 
 ## opsi hanya untuk type group "load-balance"
 ## strategy "consistent-hashing" atau "round-robin"
+#strategy = "consistent-hashing"
 #strategy = "round-robin"
 
 ### remote custom group jika sudah ada setting config group sudah jadi (ext file .toml)
@@ -76,6 +80,8 @@
 ## clash rules behavior type tergantung dr payload rules yg di pake
 ## (domain) = "clash-domain", (classical) = "clash-classic", (ipcidr) = "clash-ipcidr"
 #type = "clash-domain"
+#type = "clash-classic"
+#type = "clash-ipcidr"
 
 ## interval check rules
 #interval = 86400
