@@ -6,13 +6,13 @@
 #  atau menggunakan yg sudah disediakan sama seperti base sub.bonds.id 
 ## List url base config yg disediakan:
 
-#  https://sub.bonds.id/download/basestandard_redir.ini
-#  https://sub.bonds.id/download/basestandard_fake.ini
-#  https://sub.bonds.id/download/basecfm_redir.ini
-#  https://sub.bonds.id/download/basecfm_fake.ini
+https://sub.bonds.id/download/basestandard_redir.ini
+https://sub.bonds.id/download/basestandard_fake.ini
+https://sub.bonds.id/download/basecfm_redir.ini
+https://sub.bonds.id/download/basecfm_fake.ini
 
 ## Tutorial hanya sederhana untuk lebih jelas nya silakan baca2 di repo subconverter
-#  https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95
+[https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95]
 	
 ## Setelah custom_config di upload dan di rasa sudah mantap link hasil upload bisa di simpan untuk
 #  digunakan kembali / di share tanpa input2 lagi di "Upload Custom" dengan cara:
@@ -21,79 +21,97 @@
 
 ## ========================================================================================== ##
 
+## tutorial base config
+## buat base config di github dan ambil link raw untuk di pakai sebagai custom base config pribadi
+# contoh base config silakan lihat di link ini
+[https://raw.githubusercontent.com/djoeni/djtest/main/clashrulebase.ini]
+
+## pada contoh link di atas karena subconverter blm support untuk setting input proxy-provider maka
+# setting proxy-provider manual di input/tulis di base config
+
+## ========================================================================================== ##
+
 ## tutorial custom groups
-## header custom group
-#[[custom_groups]]
+# header custom group
+[[custom_groups]]
 
 ## nama group
-#name = "Custom_Groups"
+name = "Nama_Grup"
 
-## type group: "select" | "url-test" | "load-balance" | "fallback"
-#type = "select"
-#type = "url-test"
-#type = "load-balance"
-#type = "fallback"
+## jenis group: "select" | "url-test" | "load-balance" | "fallback"
+type = "select"
+type = "url-test"
+type = "load-balance"
+type = "fallback"
 
-## rule/isi proxy2 di groups di pisahkan dengan ", " contoh format:
-## ".*" = untuk menambahkan semua proxy yg dimasukan di subconverter
-## "[]DIRECT" , "[]REJECT" = untuk menambahkan default proxy dr clash
-## "[]BROWSING" = untuk menambahkan proxy group "BROWSING" yg di buat
-## "1" , "2" = untuk hanya menambahkan sesuai urutan proxy yg di input di subconverter
-#rule = [".*", "1", "2", "[]BROWSING", "[]DIRECT", "[]REJECT"]
+## rule di sini bukan ruleset melainkan isi proxy yg di pake di proxy group dan di pisahkan dengan tanda ", " contoh format:
+rule = [".*"] #untuk menambahkan semua proxy yg dimasukkan di kolom "Input Link Config :"
+rule = ["[]DIRECT"] #untuk menambahkan DIRECT (bawaan dari clash)
+rule = ["[]REJECT"] #untuk menambahkan REJECT (bawaan dari clash)
+rule = ["[]BROWSING"] #untuk menambahkan proxy group yg lain misal di sini proxy group dengan nama "BROWSING" yg sudah di buat sebelumnya
+rule = ["1"] #untuk menambahkan proxy urutan link pertama sesuai yg dimasukkan di "Input Link Config :" , misal di input 3 link dengan urutan trojan, vmess, vless maka yg di pake di sini hanya proxy trojan saja
+rule = ["2"] #untuk menambahkan proxy urutan link pertama sesuai yg dimasukkan di "Input Link Config :" , misal di input 3 link dengan urutan trojan, vmess, vless maka yg di pake di sini hanya proxy vmess saja
+rule = [".*", "1"] #urutan pertama di sini di abaikan karena memakai ".*" dimana semua yg di input di pakai
+
+# contoh penggunaan multi
+rule = [".*", "[]BROWSING", "[]DIRECT", "[]REJECT"]
+rule = ["[]DIRECT", "1", "2"]
 
 ## jika menggunakan proxy-provider tambahkan nama provider nya
-## untuk setting proxy-provider masih manual atau tambahkan di dalam base config
-#use "Provider"
+use = "Nama_Provider"
+# subconverter msh blm bisa menambahkan setting input proxy-providers nya (bisa di tambahkan sendiri jika memakai custom base config sendiri)
 
-## url-check
-#url = "http://www.gstatic.com/generate_204"
+## healthcheck url
+url = "http://www.gstatic.com/generate_204"
 
 ## interval url-check
-#interval = 300
+interval = 300
 
-## opsi hanya untuk type group "url-test"
-#tolerance = 150
-#lazy = true
+## opsi untuk type group "url-test"
+tolerance = 150
+lazy = true
 
-## opsi hanya untuk type group "load-balance"
-## strategy "consistent-hashing" atau "round-robin"
-#strategy = "consistent-hashing"
-#strategy = "round-robin"
+## opsi untuk type group "load-balance"
+# strategy "consistent-hashing" atau "round-robin"
+strategy = "consistent-hashing"
+strategy = "round-robin"
 
-### remote custom group jika sudah ada setting config group sudah jadi (ext file .toml)
-#[[custom_groups]]
-#import = "https://https://raw.githubusercontent.com/xxxxx/custom_groups.toml"
+## remote custom group jika sudah ada setting config group sudah jadi (ext file .toml)
+[[custom_groups]]
+import = "https://https://raw.githubusercontent.com/xxxxx/custom_groups.toml"
 
 ## ========================================================================================== ##
 
 ## tutorial ruleset
 ## header ruleset
-#[[rulesets]]
+[[rulesets]]
 
 ## nama proxy group yg digunakan untuk ruleset, nama ruleset mengikuti nama file
 ## bisa menggunakan default dr clash "DIRECT" , "REJECT"
-#group = "Nama_Group"
+group = "Nama_Group" #nama group yg dipake untuk rule ini
+group = "DIRECT" #jika rule yg di pake menggunakan DIRECT
+group = "DIRECT" #jika rule yg di pake menggunakan REJECT
 
-## remote link rules
-#ruleset = "https://https://raw.githubusercontent.com/xxxxx/rules.txt"
+## remote link rules yg mau di pake
+ruleset = "https://raw.githubusercontent.com/xxxxx/rules.txt"
 
 ## clash rules behavior type tergantung dr payload rules yg di pake
 ## (domain) = "clash-domain", (classical) = "clash-classic", (ipcidr) = "clash-ipcidr"
-#type = "clash-domain"
-#type = "clash-classic"
-#type = "clash-ipcidr"
+type = "clash-domain"
+type = "clash-classic"
+type = "clash-ipcidr"
 
-## interval check rules
-#interval = 86400
+## interval update rules
+interval = 86400
 
-### untuk rules "MATCH" menggunakan setting:
-#[[rulesets]]
-#group = "Nama_Group"
-#ruleset = "[]FINAL"
+## untuk rules "MATCH" atau menggunakan setting:
+[[rulesets]]
+group = "Nama_Group" #bisa menggunakan group = "GLOBAL" jika ingin memakai GLOBAL di panel sebagai proxy-group
+ruleset = "[]FINAL"
 
-### remote custom ruleset jika sudah ada setting config ruleset sudah jadi (ext file .toml)
-#[[rulesets]]
-#import = "https://https://raw.githubusercontent.com/xxxxx/custom_ruleset.toml"
+## remote custom ruleset jika sudah ada setting config ruleset sudah jadi (ext file .toml)
+[[rulesets]]
+import = "https://https://raw.githubusercontent.com/xxxxx/custom_ruleset.toml"
 
 ## ========================================================================================== ##
 
